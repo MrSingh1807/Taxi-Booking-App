@@ -1,5 +1,6 @@
 package com.example.taxibookingapp.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
 
     }
