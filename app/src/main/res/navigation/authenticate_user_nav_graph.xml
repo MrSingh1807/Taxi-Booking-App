@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/signIn">
+
+    <fragment
+        android:id="@+id/phoneLoginFragment"
+        android:name="com.example.taxibookingapp.UI.AuthenticateUser.PhoneLoginFragment"
+        android:label="Phone LogIn"
+        tools:layout="@layout/fragment_phone_login" />
+    <fragment
+        android:id="@+id/signIn"
+        android:name="com.example.taxibookingapp.UI.AuthenticateUser.SignIn"
+        android:label="Sign In"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signIn_to_phoneLoginFragment"
+            app:destination="@id/phoneLoginFragment" />
+        <action
+            android:id="@+id/action_signIn_to_forgotPassword"
+            app:destination="@id/forgotPassword" />
+        <action
+            android:id="@+id/action_signIn_to_signUp"
+            app:destination="@id/signUp" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPassword"
+        android:name="com.example.taxibookingapp.UI.AuthenticateUser.ResetPassword"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.taxibookingapp.UI.AuthenticateUser.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/forgotPassword"
+        android:name="com.example.taxibookingapp.UI.AuthenticateUser.ForgotPassword"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPassword_to_resetPassword"
+            app:destination="@id/resetPassword" />
+    </fragment>
+</navigation>

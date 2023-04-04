@@ -16,7 +16,6 @@ import com.example.taxibookingapp.databinding.ActivitySplashBinding;
 public class SplashActivity extends AppCompatActivity {
 
     ActivitySplashBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
