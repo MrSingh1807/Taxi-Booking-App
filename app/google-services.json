@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "238394455748",
+    "project_id": "taxi-booking-app-efba4",
+    "storage_bucket": "taxi-booking-app-efba4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238394455748:android:1f3b54dff550570f8e7b91",
+        "android_client_info": {
+          "package_name": "com.example.taxibookingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238394455748-3vm9gvrdoiagq1rimobtan5mbq8ghl3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOTJZyyLVFE05xL-Ef8vvCOOZvEIWgmmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238394455748-3vm9gvrdoiagq1rimobtan5mbq8ghl3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

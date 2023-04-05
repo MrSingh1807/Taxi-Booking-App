@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -61,5 +62,18 @@ dependencies {
 
     // Pin View
     implementation 'io.github.chaosleung:pinview:1.4.4'
+
+    // FireBase
+    implementation platform('com.google.firebase:firebase-bom:31.4.0')
+    // Auth
+    implementation 'com.google.firebase:firebase-auth:21.2.0'
+    // Realtime Database
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+
+    // Auto Phone Selector API
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation 'com.google.android.gms:play-services-identity:18.0.1'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
 
 }
