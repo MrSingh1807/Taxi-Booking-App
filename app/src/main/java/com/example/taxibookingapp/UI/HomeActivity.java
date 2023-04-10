@@ -1,14 +1,22 @@
 package com.example.taxibookingapp.UI;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.example.taxibookingapp.R;
+import com.example.taxibookingapp.SessionManager;
+import com.example.taxibookingapp.ViewModel.LoginViewModel;
 import com.example.taxibookingapp.databinding.ActivityHomeBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,12 +24,15 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class HomeActivity extends AppCompatActivity {
 
+    private ActivityHomeBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
     NavController navController;
-    private ActivityHomeBinding binding;
+    LoginViewModel loginViewModel;
 
 
     @Override
@@ -31,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
         setSupportActionBar(binding.appBarHome.toolbar);
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -58,6 +72,25 @@ public class HomeActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_setting:
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_signOut:
+
+                loginViewModel.firebaseAuth.signOut();
+                Toast.makeText(this, "SuccessFully LogOut", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

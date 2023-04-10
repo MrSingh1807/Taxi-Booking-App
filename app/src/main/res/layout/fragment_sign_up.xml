@@ -1,14 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/auth_user_background"
     android:layout_height="match_parent"
     tools:context=".UI.AuthenticateUser.SignUp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/welcomeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Wecome"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/rideTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start A New Ride..."
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="@+id/welcomeTV"
+        app:layout_constraintStart_toEndOf="@+id/welcomeTV"
+        app:layout_constraintTop_toBottomOf="@id/welcomeTV" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/personalCredentialsCV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/transparent"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="4dp"
+
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTV"
+        app:layout_constraintVertical_chainStyle="packed">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_button_login"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+
+            android:padding="15dp">
+
+
+            <EditText
+                android:id="@+id/userNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="text"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/userPhoneET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Phone Number"
+                android:inputType="number"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/userEmailET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+
+                android:ems="10"
+                android:hint="Email "
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/userPasswordET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword|numberPassword"
+                android:minHeight="48dp" />
+
+
+            <TextView
+                android:id="@+id/forSignInTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="2dp"
+                android:text="Already Have an Account!"
+                android:textColor="@color/dark_gray" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/transparent"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="4dp"
+
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/personalCredentialsCV">
+
+        <Button
+            android:id="@+id/signUpBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/layout_button_login"
+            android:text="Sign Up" />
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/ColorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="@+id/personalCredentialsCV"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/personalCredentialsCV"
+        app:layout_constraintTop_toBottomOf="@id/cardView2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/phoneSignUpBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/layout_button_login"
+        android:text="Continue With Phone"
+        android:textColor="@color/ColorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/googleSignUpBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layout_button_login"
+        android:text="Continue With Google"
+        android:textColor="@color/ColorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/phoneSignUpBTN"
+        app:layout_constraintHorizontal_bias="0.268"
+        app:layout_constraintStart_toStartOf="@+id/phoneSignUpBTN"
+        app:layout_constraintTop_toBottomOf="@+id/phoneSignUpBTN" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

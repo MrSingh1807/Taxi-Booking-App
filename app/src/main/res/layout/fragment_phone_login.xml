@@ -37,11 +37,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/spinner_login"
             android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:text="Please Enter You Phone Number Here!"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/countryCodePicker" />
+            app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.hbb20.CountryCodePicker
             android:id="@+id/countryCodePicker"
@@ -70,6 +71,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
             app:layout_constraintTop_toTopOf="@+id/countryCodePicker" />
+
+        <Button
+            android:id="@+id/continueBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/btn_transparent_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contactNumberET"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.chaos.view.PinView
@@ -79,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
         android:cursorVisible="true"
-        android:hint="Hints."
+        android:hint="O.T.P."
         android:inputType="text"
         android:itemBackground="@color/white"
         android:padding="2dp"
@@ -101,6 +113,107 @@
         app:lineColor="@color/line_colors"
         app:lineWidth="2dp"
         app:viewType="rectangle" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/personalCredentialsCV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/transparent"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="4dp"
+
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_button_login"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+
+            android:padding="15dp">
+
+
+            <EditText
+                android:id="@+id/userNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+
+                android:ems="10"
+                android:hint="Name"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/userPhoneET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Phone Number"
+                android:inputType="number"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/userEmailET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+
+                android:ems="10"
+                android:hint="Email "
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/userPasswordET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textVisiblePassword|numberPassword"
+                android:minHeight="48dp" />
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/transparent"
+        app:cardCornerRadius="5dp"
+
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/personalCredentialsCV">
+
+        <Button
+            android:id="@+id/submitBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/layout_button_login"
+            android:text="Submit" />
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
