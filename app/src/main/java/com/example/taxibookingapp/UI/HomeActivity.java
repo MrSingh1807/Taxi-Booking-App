@@ -31,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
+    SessionManager sessionManager;
+    private long back_pressed;
     NavController navController;
     LoginViewModel loginViewModel;
 
@@ -43,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        sessionManager = new SessionManager(this);
 
         setSupportActionBar(binding.appBarHome.toolbar);
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
@@ -58,13 +61,16 @@ public class HomeActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_setting, R.id.nav_profile, R.id.nav_history)
                 .setOpenableLayout(drawer)
                 .build();
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+//        navigationView.setNavigationItemSelectedListener(menuItem -> {
+//
+//        });
     }
 
     @Override
@@ -82,7 +88,9 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_signOut:
-
+                // later add a dialog box here
+                sessionManager.spEditor.clear();
+                sessionManager.spEditor.commit();
                 loginViewModel.firebaseAuth.signOut();
                 Toast.makeText(this, "SuccessFully LogOut", Toast.LENGTH_SHORT).show();
 
@@ -97,5 +105,15 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (back_pressed + 100 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press Once again to exit!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
