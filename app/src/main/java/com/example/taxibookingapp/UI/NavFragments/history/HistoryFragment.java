@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import com.example.taxibookingapp.R;
 import com.example.taxibookingapp.databinding.FragmentHistoryBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class HistoryFragment extends Fragment {
 
     FragmentHistoryBinding binding;

@@ -45,7 +45,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     public static final String PermissionTAG = "PermissionTAG";

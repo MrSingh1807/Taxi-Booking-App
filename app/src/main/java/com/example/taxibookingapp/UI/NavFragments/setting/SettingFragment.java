@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.taxibookingapp.databinding.FragmentSettingBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class SettingFragment extends Fragment {
 
     private FragmentSettingBinding binding;

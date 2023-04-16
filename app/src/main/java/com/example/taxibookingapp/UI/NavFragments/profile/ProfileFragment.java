@@ -12,6 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.taxibookingapp.databinding.FragmentProfileBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
