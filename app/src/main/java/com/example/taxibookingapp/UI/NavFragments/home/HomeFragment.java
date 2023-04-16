@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                         Toast.LENGTH_SHORT
                 ).show();
 
+                assert location != null;
                 Log.d(TAG, "Location is: Latitude -> " + location.getLatitude() + "Longitude -> " + location.getLongitude());
             }
         };
@@ -135,6 +136,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         } else if (googleApi.isUserResolvableError(result)) {
             Dialog dialog = googleApi.getErrorDialog(requireActivity(), result, PLAY_SERVICES_ERROR_CODE,
                     dialogInterface -> Toast.makeText(requireContext(), "Dialog is Cancelled By USER", Toast.LENGTH_SHORT).show());
+            assert dialog != null;
             dialog.show();
         } else {
             Toast.makeText(

@@ -2,11 +2,13 @@ package com.example.taxibookingapp.ViewModel;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -14,16 +16,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.Objects;
-
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @HiltViewModel
 public class LoginViewModel extends AndroidViewModel {
     private Application context;
+
     @Inject
     public LoginViewModel(Application application) {
         super(application);
@@ -43,8 +43,14 @@ public class LoginViewModel extends AndroidViewModel {
     // Firebase Storage
     public StorageReference profilePicStorage = firebaseStorage.getReference().child("profile_pics");
 
+    public boolean checkNetworkConnectivity() {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnected();
+    }
 
-    public Boolean validateEmail( String email) {
+
+    public Boolean validateEmail(String email) {
         if (email.isEmpty()) {
             Toast.makeText(context, "Please Enter an Email ID", Toast.LENGTH_SHORT).show();
 
@@ -56,13 +62,14 @@ public class LoginViewModel extends AndroidViewModel {
         }
         return false;
     }
-    public Boolean validatePassword( String passWord) {
+
+    public Boolean validatePassword(String passWord) {
 
         if (passWord.isEmpty()) {
             Toast.makeText(context, "Please Enter password", Toast.LENGTH_SHORT).show();
 
         } else if (passWord.length() < 6) {
-            String  text = "Password does't less than 6";
+            String text = "Password does't less than 6";
             Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
         } else {
             return true;

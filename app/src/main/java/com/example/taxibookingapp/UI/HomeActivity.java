@@ -47,6 +47,25 @@ public class HomeActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         sessionManager = new SessionManager(this);
 
+
+        if (loginViewModel.checkNetworkConnectivity()) {
+            binding.drawerLayout.setVisibility(View.VISIBLE);
+            binding.noInterNetLL.setVisibility(View.INVISIBLE);
+        } else {
+            binding.drawerLayout.setVisibility(View.INVISIBLE);
+            binding.noInterNetLL.setVisibility(View.VISIBLE);
+        }
+
+        binding.btnRetry.setOnClickListener(view -> {
+            if (loginViewModel.checkNetworkConnectivity()) {
+                Toast.makeText(this, "Welcome! you're connected", Toast.LENGTH_SHORT).show();
+                binding.drawerLayout.setVisibility(View.VISIBLE);
+                binding.noInterNetLL.setVisibility(View.INVISIBLE);
+            } else {
+                Toast.makeText(this, "Please Connect your device with Internet", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         setSupportActionBar(binding.appBarHome.toolbar);
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
