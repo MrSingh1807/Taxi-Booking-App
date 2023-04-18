@@ -1,34 +1,45 @@
 package com.example.taxibookingapp.UI;
 
+import static com.example.taxibookingapp.Services.Constants.ACTION_START_LOCATION_SERVICE;
+import static com.example.taxibookingapp.Services.Constants.ACTION_STOP_LOCATION_SERVICE;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.widget.Toast;
 
-import com.example.taxibookingapp.R;
-import com.example.taxibookingapp.SessionManager;
-import com.example.taxibookingapp.ViewModel.LoginViewModel;
-import com.example.taxibookingapp.databinding.ActivityHomeBinding;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.taxibookingapp.R;
+import com.example.taxibookingapp.Services.LocationService;
+import com.example.taxibookingapp.SessionManager;
+import com.example.taxibookingapp.ViewModel.LoginViewModel;
+import com.example.taxibookingapp.databinding.ActivityHomeBinding;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class HomeActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private ActivityHomeBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
     SessionManager sessionManager;
@@ -135,4 +146,54 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(this, "Press Once again to exit!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private boolean isLocationServiceRunning() {
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        if (activityManager != null) {
+            for (ActivityManager.RunningServiceInfo service : activityManager.getRunningServices(Integer.MAX_VALUE)) {
+                if (LocationService.class.getName().equals(service.service.getClassName())) {
+                    if (service.foreground) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public void startLocationService() {
+        if (!isLocationServiceRunning()) {
+            Intent startServiceIntent = new Intent(getApplicationContext(), LocationService.class);
+            startServiceIntent.setAction(ACTION_START_LOCATION_SERVICE);
+            startService(startServiceIntent);
+        }
+    }
+
+    public void stopLocationService() {
+        if (isLocationServiceRunning()) {
+            Intent startServiceIntent = new Intent(getApplicationContext(), LocationService.class);
+            startServiceIntent.setAction(ACTION_STOP_LOCATION_SERVICE);
+            stopService(startServiceIntent);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_LOCATION_PERMISSION);
+        } else {
+            startLocationService();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopLocationService();
+    }
+
 }
